@@ -1,0 +1,26 @@
+{
+  "name": "techv-sern",
+  "version": "1.0.0",
+  "description": "Assignment for TechVariable",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/santa1k95/TechV-sern.git"
+  },
+  "author": "Santanu Phukan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/santa1k95/TechV-sern/issues"
+  },
+  "homepage": "https://github.com/santa1k95/TechV-sern#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.1",
+    "nodemon": "^2.0.12"
+  }
+}
