@@ -20,9 +20,9 @@ transport.on('rotate', function (oldFilename, newFilename) {
   // do something fun
 });
 
-var userLogger = winston.createLogger({
+var documentModelLogger = winston.createLogger({
   format: combine(
-    label({ label: 'User Logger' }),
+    label({ label: 'Docucmet Model Logger' }),
     timestamp(),
     myFormat
   ),
@@ -31,9 +31,9 @@ var userLogger = winston.createLogger({
   ]
 });
 
-var articleLogger = winston.createLogger({
+var documentRouteLogger = winston.createLogger({
   format: combine(
-    label({ label: 'Article Logger' }),
+    label({ label: 'Docucmet Route Logger' }),
     timestamp(),
     myFormat
   ),
@@ -42,9 +42,9 @@ var articleLogger = winston.createLogger({
   ]
 });
 
-var authLogger = winston.createLogger({
+var uploadLogger = winston.createLogger({
   format: combine(
-    label({ label: 'Authentication Logger' }),
+    label({ label: 'Upload Logger' }),
     timestamp(),
     myFormat
   ),
@@ -89,6 +89,6 @@ var mainLogger = winston.createLogger({
 // mainLogger.info('Hello World!');
 
 module.exports = {
-  userLogger, articleLogger, authLogger, passportLogger, dbLogger,
+  documentModelLogger, documentRouteLogger, uploadLogger, passportLogger, dbLogger,
   mainLogger
 }

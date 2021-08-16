@@ -22,21 +22,22 @@ app.get('/',(req,res)=>{
 
 
 /**Configuring DB (Testing the DB Connetion)*/ 
-// const db = require('./config/db')
 
-// db.authenticate().then(()=>{
-//     logger.info('DB Connection has been established successfully.');
-//     console.log('DB Connection has been established successfully.');
-// }).catch((err)=>{
-//     logger.error(err.toString());
-//     console.log(err.toString());
-// })
+
+const db = require('./config/db')
+
+db.authenticate().then(()=>{
+    logger.info('DB Connection has been established successfully.');
+}).catch((err)=>{
+    logger.error(err.toString());
+    console.log(err.toString());
+})
 
 
 app.use(urlencoded({extended:false}))
 app.use(bodyParser.json())
 app.use(routes(this.app))
-
+const PORT=3000
 app.listen(3000,()=>{
-    console.log("Server Listening to port 3000")
+    console.log("Server Listening to port 3000\nUri: http://localhost:"+PORT)
 })
