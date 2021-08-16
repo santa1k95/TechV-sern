@@ -4,7 +4,10 @@
   "description": "Assignment for TechVariable",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "client": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -17,10 +20,18 @@
   },
   "homepage": "https://github.com/santa1k95/TechV-sern#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.1",
+    "method-override": "^3.0.0",
+    "mysql2": "^2.3.0",
+    "sequelize": "^6.6.5",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.5"
   },
   "devDependencies": {
     "concurrently": "^6.2.1",
+    "dotenv": "^10.0.0",
     "nodemon": "^2.0.12"
   }
 }
