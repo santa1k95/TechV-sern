@@ -8,17 +8,16 @@ const routes= require('./routes')
 const app = express()
 
 app.use(express.static(__dirname + '/public'));
-// app.use('/user',express.static(__dirname+'public/'))
+app.use('/document',express.static(__dirname+'public/'))
 
 app.use(expressLayouts)
 app.set('layout', './layouts/full-width.ejs')
 app.set('view-engine','ejs')
 
-app.get('/',(req,res)=>{
-    console.log(req)
-    const loggedUser={firstname:"Santanu",lastname:"Phukan"}
-    res.render('index.ejs',{user: loggedUser,title: "Home Page"})
-})
+// app.get('/',(req,res)=>{
+//     const loggedUser={firstname:"Santanu",lastname:"Phukan"}
+//     res.render('index.ejs',{user: loggedUser,title: "Home Page"})
+// })
 
 
 /**Configuring DB (Testing the DB Connetion)*/ 

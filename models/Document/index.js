@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const {Sequelize,DataTypes} = require('sequelize');
 const db = require('../../config/db')
 const logger = require('../../config/logger').documentModelLogger
 
@@ -10,12 +10,9 @@ const Document = db.define('Document', {
 
         }
     },
-    fileUri: {
-        type: Sequelize.STRING,
-        // allowNull: false,
-        validate: {
-
-        }
+    fileData: {
+        type: DataTypes.BLOB("long"),
+    
     }
 
 },{

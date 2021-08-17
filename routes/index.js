@@ -2,10 +2,8 @@ module.exports = function(app) {
     const mainroute = require('express').Router()
     const logger = require('../config/logger').mainLogger;
   
-    /* ---- other existing routes included ---- */
     const r_document = require('./document'); /*document route*/
   
-    /* ---- all other routes ---- */
     mainroute.use('/document', r_document(app)); /*documentroute*/
   
     mainroute.get('/', (req, res) => {
