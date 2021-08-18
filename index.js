@@ -4,7 +4,7 @@ const expressLayouts  = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
 const logger=require('./config/logger').mainLogger;
 const routes= require('./routes')
-
+const cors = require('cors');
 const app = express()
 
 app.use(express.static(__dirname + '/public'));
@@ -34,9 +34,10 @@ db.authenticate().then(()=>{
 
 
 app.use(urlencoded({extended:false}))
-app.use(bodyParser.json())
+app.use(cors())
+app.use(express.json())
 app.use(routes(this.app))
-const PORT=3000
-app.listen(3000,()=>{
-    console.log("Server Listening to port 3000\nUri: http://localhost:"+PORT)
+const PORT=process.env.PORT || 5000
+app.listen(5000,()=>{
+    console.log("Server Listening to port 5000\nUri: http://localhost:"+PORT)
 })
