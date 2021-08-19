@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes,Op } = require('sequelize');
-const db = require('../../config/db')
-const logger = require('../../config/logger').documentModelLogger;
+const db = require('../../db')
+const logger = require('../../logger').documentModelLogger;
 var moment = require('moment');
 // moment().format("YYYY-MM-DD HH:mm:ss")
 

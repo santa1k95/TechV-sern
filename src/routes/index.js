@@ -1,6 +1,6 @@
 module.exports = function(app) {
     const mainroute = require('express').Router()
-    const logger = require('../config/logger').mainLogger;
+    const logger = require('../logger').mainLogger;
   
     const r_document = require('./document'); /*document route*/
   

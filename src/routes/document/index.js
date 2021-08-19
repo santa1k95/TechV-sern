@@ -1,7 +1,7 @@
 module.exports = function(app, passport) {
     const express = require('express');
     const router = express.Router();
-    const logger = require('../../config/logger').documentRouteLogger;
+    const logger = require('../../logger').documentRouteLogger;
     // const methodOverride = require('method-override');
     const userController = require('../../controllers/document');
 

@@ -1,4 +1,4 @@
-const logger = require('../../config/logger').documentRouteLogger;
+const logger = require('../../logger').documentRouteLogger;
 const multer = require('multer');
 const Document = require('../../models/Document')
 const upload = multer({

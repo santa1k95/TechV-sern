@@ -2,7 +2,7 @@ const { urlencoded } = require('express')
 const express = require('express')
 const expressLayouts  = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
-const logger=require('./config/logger').mainLogger;
+const logger=require('./logger').mainLogger;
 const routes= require('./routes')
 const cors = require('cors');
 const app = express()
@@ -23,7 +23,7 @@ app.set('view-engine','ejs')
 /**Configuring DB (Testing the DB Connetion)*/ 
 
 
-const db = require('./config/db')
+const db = require('./db')
 
 db.authenticate().then(()=>{
     logger.info('DB Connection has been established successfully.');

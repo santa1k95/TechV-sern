@@ -8,7 +8,7 @@ const myFormat = printf(({ level, message, label, timestamp }) => {
 });
 
 var transport = new winston.transports.DailyRotateFile({
-  dirname: './logs',
+  dirname: '../logs',
   filename: 'application-%DATE%.log',
   datePattern: 'YYYY-MM-DD-HH',
   zippedArchive: true,
