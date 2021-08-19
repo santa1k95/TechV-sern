@@ -8,8 +8,7 @@ module.exports = function(app) {
   
     mainroute.get('/', (req, res) => {
       try {
-        const loggedUser={firstname:"Santanu",lastname:"Phukan"}
-        res.render('index.ejs',{user: loggedUser,title: "Home Page"});
+        // res.redirect('/')
       } catch (error) {
         logger.info(error.toString())
       }
