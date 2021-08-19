@@ -2,11 +2,17 @@ const request = require('supertest');
 const app = require('../src/app');
 const Document = require('../src/models/Document');
 
+const doc={
+    fileName:"Santa.pdf",
+    type:"application/pdf"
+}
+
 beforeEach(()=>{
     Document.destroy({
         where: {},
         truncate: true
       })
+    new Document(doc).save()
 })
 
 afterEach(()=>{
