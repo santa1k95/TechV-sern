@@ -4,11 +4,29 @@ import { useState } from 'react';
 
 export default function Home({ documents, updateDocuments }) {
     const [selectedFiles, setSelectedFiles] = useState(null);
-    const [fileNames, setFileNames] = useState("");
+    const [fileNames, setFileNames] = useState();
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('')
+    let randomString = Math.random().toString(36);
 
+    const [fileInputKey, setfileInputKey] = useState(randomString)
     const formatDate = (dateString) => {
         const options = { year: "numeric", month: "long", day: "numeric" }
         return new Date(dateString).toLocaleDateString(undefined, options)
+    }
+
+    const showErrorMessage = (msg)=>{
+        setErrorMessage(msg);
+        setTimeout(()=>{
+            setErrorMessage('');
+        },3000)
+    }
+
+    const showSuccessMessage = (msg)=>{
+        setSuccessMessage(msg);
+        setTimeout(()=>{
+            setSuccessMessage('');
+        },3000)
     }
 
     const handleOnChange = (e) => {
@@ -31,32 +49,38 @@ export default function Home({ documents, updateDocuments }) {
 
     const handleUpload = async function (event) {
         try {
-            console.log(selectedFiles)
-            let formData = new FormData();
-            for (let file of selectedFiles) {
-                formData.append('files', file)
-            }
+            if (selectedFiles) {
+                let formData = new FormData();
+                for (let file of selectedFiles) {
+                    formData.append('files', file)
+                }
 
-            const requestOptions = {
-                method: 'POST',
-                body: formData,
-                redirect: 'follow'
-            };
+                const requestOptions = {
+                    method: 'POST',
+                    body: formData,
+                    redirect: 'follow'
+                };
 
-            await setSelectedFiles(null)
-            await setFileNames("")
+                await setSelectedFiles(null)
+                await setFileNames(null)
+                await setfileInputKey(null)
 
 
-            fetch("http://localhost:5000/document/upload", requestOptions)
-                .then(response => response.text())
-                .then(result => {
+                const response = await fetch("http://localhost:5000/document/upload", requestOptions)
+                let jsonRes = await response.json();
+                setfileInputKey(randomString)
+                if (response.status === 400) {
+                    showErrorMessage(jsonRes.error)
+                    return
+                } else {
+                    
                     updateDocuments()
-
-                    console.log(result)
-                })
-                .catch(error => console.log('error', error));
+                    showSuccessMessage(jsonRes.message)
+                }
+            }
         } catch (error) {
             console.log('error :>> ', error);
+
         }
     }
 
@@ -69,7 +93,6 @@ export default function Home({ documents, updateDocuments }) {
                 updateDocuments()
             }
         } catch (error) {
-
         }
 
     }
@@ -79,7 +102,17 @@ export default function Home({ documents, updateDocuments }) {
             <div className="topbar">
                 <h1>Document Managemnt System</h1>
             </div>
-
+            <div className="msgDiv">
+                {errorMessage && (
+                    <span className="error"> <i class="fas fa-times"></i> {errorMessage} </span>
+                    
+                )}
+                {successMessage && (
+                    <span className="success"> <i class="fas fa-check"></i> {successMessage} </span>
+                    
+                )}
+                
+            </div>
             <div className="btnwrapper">
                 <div className="form">
                     {/* <div className="displayFNames">
@@ -87,6 +120,8 @@ export default function Home({ documents, updateDocuments }) {
                     </div> */}
                     <input
                         id="documents"
+                        key={fileInputKey || ''}
+                        accept=".doc,.docx,.pdf"
                         multiple
                         type="file"
                         onChange={(e) => handleOnChange(e)}

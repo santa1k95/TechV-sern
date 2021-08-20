@@ -47,6 +47,7 @@ const uploadDocuments=async (req,res)=>{
         logger.info("Completed /document/upload")
         res.status(200).json({message: "Upload Succesful"})
     } catch (error) {
+        res.status(400).json({error: error.message})
         logger.error("Error in /document/upload "+ error.toString())
         
     }
