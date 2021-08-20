@@ -80,7 +80,7 @@ const deleteDocument = async (req,res)=>{
             where: {id}
         })
         logger.info("Completed delete document")
-        res.status(200).json({message:"deleted"})
+        res.status(200).json({message:"Deleted"})
     } catch (error) {
         logger.error("Error in delete: "+error.toString())
         res.status(400).json({error:"Unable to delete"})
