@@ -7,7 +7,6 @@ const upload = multer({
         fileSize: 2000000
     },
     fileFilter(req, file, cb) {
-        // console.log(file)
         if (!file.originalname.match(/\.(doc|docx|pdf)$/)) {
             return cb(new Error('Unsupported file provided'))
         }
@@ -25,7 +24,7 @@ const uploadDocuments=async (req,res)=>{
         const files=req.files
         const results=[]
         for (let file of files){
-            console.log(file)
+            logger.info("File "+file)
             let {originalname,mimetype} = file;
             logger.info("Processing: "+file.originalname)
 
@@ -76,7 +75,7 @@ const deleteDocument = async (req,res)=>{
     try {
         logger.info("In delete document")
         const id = req.params.id;
-        console.log(id)
+        logger.info("Id: "+id)
         await Document.destroy({
             where: {id}
         })

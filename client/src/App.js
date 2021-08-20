@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react';
 
 function App() {
 
-  const [state, setstate] = useState(() => {
-    return { firstName: "Santanu", lastName: "Phukan" }
-  })
-
   const [documents, setdocuments] = useState(() => {
     return []
+  })
+
+  const [showDocs, setshowDocs] = useState(()=>{
+    return false
   })
 
   const updateDocuments = async function () {
@@ -25,6 +25,10 @@ function App() {
       let jsonRes = await res.json();
       if (res) {
         // const data= await JSON.parse(res.body)
+        if(jsonRes.data.documents.length >0){
+          setshowDocs(true)
+        }
+        else setshowDocs(false)
         setdocuments(jsonRes.data.documents)
       }
     } catch (error) {
@@ -36,7 +40,7 @@ function App() {
     updateDocuments();
   }, [])
   return (
-    <Home documents={documents} updateDocuments={updateDocuments}/>
+    <Home showDocs={showDocs} documents={documents} updateDocuments={updateDocuments}/>
   );
 }
 

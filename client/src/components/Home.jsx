@@ -2,7 +2,7 @@ import './home.scss'
 import React from 'react'
 import { useState } from 'react';
 
-export default function Home({ documents, updateDocuments }) {
+export default function Home({ showDocs, documents, updateDocuments }) {
     const [selectedFiles, setSelectedFiles] = useState(null);
     const [fileNames, setFileNames] = useState();
     const [errorMessage, setErrorMessage] = useState('');
@@ -34,7 +34,7 @@ export default function Home({ documents, updateDocuments }) {
         let selectedFileNames = ""
         try {
             for (const file of files) {
-                if (selectedFileNames == "") {
+                if (selectedFileNames === "") {
                     selectedFileNames = file.name
                 } else {
                     selectedFileNames = selectedFileNames.concat(',', file.name)
@@ -132,7 +132,7 @@ export default function Home({ documents, updateDocuments }) {
                     <div className="btn-upload" onClick={event => handleUpload(event)}>Upload</div>
                 </div>
             </div>
-            <div className="tablewrapper">
+            <div className={"tablewrapper "+(showDocs && "active")}>
                 <table id="doument-table">
                     <tr>
                         <th className="tableHeader">File Name</th>
@@ -143,7 +143,7 @@ export default function Home({ documents, updateDocuments }) {
                     {
                         documents.map(el => {
                             return (
-                                <tr className="data-row">
+                                <tr key={el.id} className="data-row">
                                     {/* <td>
                                         {el.id}
                                     </td> */}
@@ -157,7 +157,7 @@ export default function Home({ documents, updateDocuments }) {
                                         {formatDate(el.expiresOn)}
                                     </td>
                                     <td className="tableData">
-                                        <a onClick={() => deleteDocument(el.id)}>Delete</a>
+                                        <a href="#" onClick={() => deleteDocument(el.id)}>Delete</a>
                                     </td>
                                 </tr>
                             )
