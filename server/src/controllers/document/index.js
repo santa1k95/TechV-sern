@@ -42,10 +42,10 @@ const uploadDocuments=async (req,res)=>{
         };
         if(results.length != files.length){
             logger.error("Error in uploading the files")
-            res.status(400).send({error: "Error in uploading the files"})
+            res.status(400).json({error: "Error in uploading the files"})
         }
         logger.info("Completed /document/upload")
-        res.status(200).send({message: "Upload Succesful"})
+        res.status(200).json({message: "Upload Succesful"})
     } catch (error) {
         logger.error("Error in /document/upload "+ error.toString())
         
@@ -54,7 +54,7 @@ const uploadDocuments=async (req,res)=>{
 
 const documentUploadErrorCallback=(error,req,res,next)=>{
     logger.error("Error in /document/upload "+ error.message)
-    res.status(400).send({error: error.message})
+    res.status(400).json({error: error.message})
 }
 
 const getAllDocuments=async (req,res)=>{
@@ -63,11 +63,11 @@ const getAllDocuments=async (req,res)=>{
         const documents=await Document.getAllDocuments();
         if(documents){
             logger.info("Started in /getall: ")
-            res.status(200).send(JSON.stringify({data:{documents}}))
+            res.status(200).json({data:{documents}})
         }
     } catch (error) {
         logger.error("Error in /getall: "+error.toString())
-        res.status(400).send({error: "Unable to get documents"})
+        res.status(400).json({error: "Unable to get documents"})
     }
 }
 
@@ -80,10 +80,10 @@ const deleteDocument = async (req,res)=>{
             where: {id}
         })
         logger.info("Completed delete document")
-        res.status(200).send({message:"deleted"})
+        res.status(200).json({message:"deleted"})
     } catch (error) {
         logger.error("Error in delete: "+error.toString())
-        res.status(400).send({error:"Unable to delete"})
+        res.status(400).json({error:"Unable to delete"})
     }
 }
 
