@@ -134,16 +134,19 @@ export default function Home({ showDocs, documents, updateDocuments }) {
             </div>
             <div className={"tablewrapper "+(showDocs && "active")}>
                 <table id="doument-table">
-                    <tr>
+                    <thead>
+                        <tr>
                         <th className="tableHeader">File Name</th>
                         <th className="tableHeader">Type</th>
                         <th className="tableHeader">Expires On</th>
                         <th className="tableHeader">Delete</th>
                     </tr>
+                    </thead>
                     {
                         documents.map(el => {
                             return (
-                                <tr key={el.id} className="data-row">
+                                <tbody key={el.id}>
+                                <tr  className="data-row">
                                     {/* <td>
                                         {el.id}
                                     </td> */}
@@ -160,6 +163,7 @@ export default function Home({ showDocs, documents, updateDocuments }) {
                                         <a href="#" onClick={() => deleteDocument(el.id)}>Delete</a>
                                     </td>
                                 </tr>
+                                </tbody>
                             )
                         })
                     }
